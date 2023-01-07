@@ -1,47 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Card from '../Card/Card'
 import "./FeaturedProducts.scss"
+import { useState } from "react";
+import axios from "axios"
+
+
+
 
 const FeaturedProducts = ({ type }) => {
 
-    const data = [
-        {
-            id: 1,
-            img: "https://images.pexels.com/photos/8764344/pexels-photo-8764344.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            img2: "https://images.pexels.com/photos/458698/pexels-photo-458698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            title: "Long Sleeve Graphic Tshirt",
-            isNew: true,
-            oldPrice: 19,
-            price: 12,
-        },
-        {
-            id: 2,
-            img: "https://images.pexels.com/photos/8764344/pexels-photo-8764344.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            img2: "https://images.pexels.com/photos/458698/pexels-photo-458698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            title: "Long Sleeve Graphic Tshirt",
-            isNew: true,
-            oldPrice: 19,
-            price: 12,
-        },
-       {
-            id: 3,
-            img: "https://images.pexels.com/photos/8764344/pexels-photo-8764344.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            img2: "https://images.pexels.com/photos/458698/pexels-photo-458698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            title: "Long Sleeve Graphic Tshirt",
-            isNew: true,
-            oldPrice: 19,
-            price: 12,
-       },
-       {
-            id: 4,
-            img: "https://images.pexels.com/photos/8764344/pexels-photo-8764344.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            img2: "https://images.pexels.com/photos/458698/pexels-photo-458698.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-            title: "Long Sleeve Graphic Tshirt",
-            isNew: true,
-            oldPrice: 19,
-            price: 12,
+
+    const [data, setData] = useState ([])
+      
+      useEffect(() => {
+        const fetchData = async () => {
+          try{
+            const res = await axios.get(process.env.REACT_APP_API_URL+"/products",{
+              headers:{
+                Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+              }
+            });
+            setData(res.data.data)
+          }catch(err){
+            console.log(err);
           }
-    ]
+        }
+        fetchData();
+      },[])
+
   return (
     <div className='featuredProducts'>
       <div className="top">
