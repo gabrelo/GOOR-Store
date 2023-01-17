@@ -4,11 +4,7 @@ import "./FeaturedProducts.scss"
 import { useState } from "react";
 import axios from "axios"
 
-
-
-
 const FeaturedProducts = ({ type }) => {
-
 
     const [data, setData] = useState ([])
       
